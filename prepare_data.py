@@ -214,8 +214,12 @@ def load_surgeon_data() -> tuple[Dict, Set[str]]:
                 
                 # Create unique ID and determine dataset mode
                 unique_id = f"{pat_num}_{side}"
-                if SURGEON_SHEET_NAMES != 'OS4':
+                
+                if sheet_name == 'OS1':
                     unique_ids.add(unique_id)
+                    
+                if sheet_name != 'OS1' and unique_id not in unique_ids:
+                    continue
                 
                 dataset_mode = 'int' if pat_num < 1000 else 'ex'
                 
